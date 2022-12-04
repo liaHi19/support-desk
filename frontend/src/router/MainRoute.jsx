@@ -16,7 +16,7 @@ const MainRoute = () => {
           <Route index element={<Home />} />
           <Route path="register" element={<Register />} />
           <Route path="login" element={<Login />} />
-          <Route path="new-ticket" element={<PrivateRoute />} >
+          <Route path="new-ticket" element={<PrivateRoute />}>
             <Route index element={<NewTicket />} />
           </Route>
         </Route>
