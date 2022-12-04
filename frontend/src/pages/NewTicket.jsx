@@ -13,7 +13,7 @@ const NewTicket = () => {
   const [description, setDescription] = useState("");
   const { user } = useSelector((state) => state.auth);
   const { isLoading, isError, isSuccess, message } = useSelector(
-    (state) => state.ticket
+    (state) => state.tickets
   );
 
   const dispatch = useDispatch();

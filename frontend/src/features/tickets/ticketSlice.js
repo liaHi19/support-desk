@@ -25,6 +25,19 @@ export const createTicket = createAsyncThunk(
   }
 );
 
+export const getTickets = createAsyncThunk(
+  "tickets/getTickets",
+  async (_, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await ticketService.getTickets(token);
+    } catch (error) {
+      const message = transformError(error);
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const ticketSlice = createSlice({
   name: "ticket",
   initialState,
@@ -42,6 +55,20 @@ export const ticketSlice = createSlice({
         state.isSuccess = true;
       })
       .addCase(createTicket.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = payload;
+      })
+      .addCase(getTickets.pending, (state) => {
+        state.isLoading = true;
+        state.isError = false;
+      })
+      .addCase(getTickets.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.tickets = payload;
+      })
+      .addCase(getTickets.rejected, (state, { payload }) => {
         state.isLoading = false;
         state.isError = true;
         state.message = payload;
