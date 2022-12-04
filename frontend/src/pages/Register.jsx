@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { register, reset } from "../features/auth/authSlice";
 
+import Spinner from "../components/Spinner";
+
 const Register = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -53,63 +55,69 @@ const Register = () => {
   };
   return (
     <>
-      <section className="heading">
-        <h1>
-          <FaUser /> Register
-        </h1>
-        <p>Please create an account</p>
-      </section>
-      <section className="form">
-        <form onSubmit={onSubmit}>
-          <div className="form-group">
-            <input
-              className="form-control"
-              type="text"
-              placeholder="Enter your name"
-              name="name"
-              value={name}
-              onChange={onChange}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <input
-              className="form-control"
-              type="email"
-              placeholder="Enter your email"
-              name="email"
-              value={email}
-              onChange={onChange}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <input
-              className="form-control"
-              type="password"
-              placeholder="Enter password"
-              name="password"
-              value={password}
-              onChange={onChange}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <input
-              className="form-control"
-              type="password"
-              placeholder="Confirm password"
-              name="password2"
-              value={password2}
-              onChange={onChange}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <button className="btn btn-block">Submit</button>
-          </div>
-        </form>
-      </section>
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <>
+          <section className="heading">
+            <h1>
+              <FaUser /> Register
+            </h1>
+            <p>Please create an account</p>
+          </section>
+          <section className="form">
+            <form onSubmit={onSubmit}>
+              <div className="form-group">
+                <input
+                  className="form-control"
+                  type="text"
+                  placeholder="Enter your name"
+                  name="name"
+                  value={name}
+                  onChange={onChange}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <input
+                  className="form-control"
+                  type="email"
+                  placeholder="Enter your email"
+                  name="email"
+                  value={email}
+                  onChange={onChange}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <input
+                  className="form-control"
+                  type="password"
+                  placeholder="Enter password"
+                  name="password"
+                  value={password}
+                  onChange={onChange}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <input
+                  className="form-control"
+                  type="password"
+                  placeholder="Confirm password"
+                  name="password2"
+                  value={password2}
+                  onChange={onChange}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <button className="btn btn-block">Submit</button>
+              </div>
+            </form>
+          </section>
+        </>
+      )}
     </>
   );
 };
