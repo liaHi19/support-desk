@@ -17,9 +17,7 @@ const Tickets = () => {
   useEffect(() => {
     if (isError) {
       toast.error(message);
-      dispatch(reset());
     }
-
     return () => {
       if (isSuccess) {
         dispatch(reset());
@@ -48,7 +46,7 @@ const Tickets = () => {
             </div>
             {tickets.length > 0 &&
               tickets.map((ticket) => (
-                <TicketItem key={ticket._id} {...ticket} />
+                <TicketItem key={ticket._id} ticket={ticket} />
               ))}
           </div>
         </>

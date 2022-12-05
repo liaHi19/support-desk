@@ -31,7 +31,7 @@ const getTicket = asyncHandler(async (req, res) => {
 
   const ticket = await Ticket.findById(req.params.id);
   if (!ticket) {
-    res.status(400);
+    res.status(404);
     throw new Error("Ticket not found");
   }
   if (ticket.user.toString() !== req.user.id) {
